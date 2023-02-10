@@ -1,0 +1,38 @@
+version: '1.0'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      -  db:/var/lib/postgres/data
+      -  ./src/db/sql/create-entities.sql:/docker-entrypoint-initdb.d/create-entities.sql
+      -  ./src/db/sql/create-access-to-entities.sql:/docker-entrypoint-initdb.d/create-access-to-entities.sql
+  
+  gqlms:
+    container_name: gqlms
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: gqlms      
+    links:
+      - db
+    volumes:
+      - './:/server'
+
+volumes:
+    db:
+      driver: local
+  

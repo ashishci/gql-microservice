@@ -1,0 +1,15 @@
+[submodule "customer-api"]
+	path = customer-api
+	url = https://github.com/ashishci/customer-api
+[submodule "history-api"]
+	path = history-api
+	url = https://github.com/ashishci/history-api
+[submodule "inventory-api"]
+	path = inventory-api
+	url = https://github.com/ashishci/inventory-api.git
+[submodule "invoice-api"]
+	path = invoice-api
+	url = https://github.com/ashishci/invoice-api
+[submodule "shipping-api"]
+	path = shipping-api
+	url = https://github.com/ashishci/shipping-api
