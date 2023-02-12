@@ -13,3 +13,6 @@
 [submodule "shipping-api"]
 	path = shipping-api
 	url = https://github.com/ashishci/shipping-api
+[submodule "middleware"]
+	path = middleware
+	url = https://github.com/ashishci/middleware
