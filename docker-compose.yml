@@ -11,15 +11,15 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       -  db:/var/lib/postgres/data
-      -  ./src/db/sql/create-entities.sql:/docker-entrypoint-initdb.d/create-entities.sql
       -  ./src/db/sql/create-access-to-entities.sql:/docker-entrypoint-initdb.d/create-access-to-entities.sql
+      -  ./src/db/sql/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
   
   gqlms:
     container_name: gqlms
     build:
       context: .
     ports:
-      - 8080:8080
+      - 4000:4000
     environment:
       NODE_ENV: development
       DB_HOST: db

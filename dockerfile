@@ -8,7 +8,7 @@ WORKDIR /usr/src/server
 
 COPY . /usr/src/server
 
-EXPOSE 8080
+EXPOSE 4000
 
 RUN npm install
 
