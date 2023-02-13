@@ -1,1 +1,1 @@
-console.log(`Hello from gqlms`)
+console.log('Hello from gqlms')
