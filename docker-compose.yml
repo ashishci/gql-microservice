@@ -7,8 +7,8 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       -  db:/var/lib/postgres/data
       -  ./src/db/sql/create-access-to-entities.sql:/docker-entrypoint-initdb.d/create-access-to-entities.sql
@@ -19,7 +19,7 @@ services:
     restart: always
     ports:
       - 6379:6379
-    command: redis-server --save 20 1 --loglevel warning --requirepass redisPassword
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
     volumes:
       - cache:/data
       
@@ -31,11 +31,11 @@ services:
       - 4000:4000
     environment:
       NODE_ENV: development
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: gqlms      
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}      
     links:
       - db
     volumes:
