@@ -10,10 +10,10 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      -  db:/var/lib/postgres/data
-      -  ./src/db/sql/create-access-to-entities.sql:/docker-entrypoint-initdb.d/create-access-to-entities.sql
-      -  ./src/db/sql/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
-  
+      - db:/var/lib/postgres/data
+      - ./src/db/sql/create-db-and-grant-access-to-entities.sql:/docker-entrypoint-initdb.d/create-db-and-grant-access-to-entities.sql
+      - ./src/db/sql/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
+
   cache:
     image: redis:latest
     restart: always
@@ -22,7 +22,7 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
     volumes:
       - cache:/data
-      
+
   gqlms:
     container_name: gqlms
     build:
@@ -30,20 +30,19 @@ services:
     ports:
       - 4000:4000
     environment:
-      NODE_ENV: development
+      NODE_ENV: ${NODE_ENV}
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}      
+      DB_NAME: ${DB_NAME}
     links:
       - db
     volumes:
       - './:/server'
 
 volumes:
-    cache:
-      driver: local
-    db:
-      driver: local
-  
+  cache:
+    driver: local
+  db:
+    driver: local
