@@ -24,6 +24,7 @@ services:
       - cache:/data
 
   gqlms:
+    image: node:${NODE_VERSION}
     container_name: gqlms
     build:
       context: .
