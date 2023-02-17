@@ -9,6 +9,8 @@ WORKDIR /usr/src/server
 COPY . /usr/src/server
 
 EXPOSE 4000
+EXPOSE 6379
+EXPOSE 5432
 
 RUN yarn install
 

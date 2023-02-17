@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev src/main.ts",
-    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+    "lint": "eslint --ignore-path .eslintignore --ext src/**/*.js, src/**/*.ts",
     "format": "prettier --ignore-path .gitignore --write \"src/**/*.+(js|ts|json)\"",
     "start": "ts-node src/main.ts"
   },
